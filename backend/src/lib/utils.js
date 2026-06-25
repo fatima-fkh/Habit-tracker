@@ -33,8 +33,7 @@ function calculateStreak(logDates, today = new Date()) {
 function habitDetails(habit) {
     const logDatesStr = habit.habitLogs.map((log) => dateStr(log.addedAt));
     const { streak, streakStatus, loggedToday } = calculateStreak(logDatesStr);
-    const dates = habit.habitLogs.map(log => log.addedAt);
-    const last7days = history7days(dates);
+    const last7days = history7days(logDatesStr);
 
     return ({
         id: habit.id,
@@ -54,14 +53,12 @@ function history7days(logDates) {
     for (let i = 6; i >= 0; i--) {
         const d = new Date();
         d.setDate(d.getDate() - i);
-        streakDays.push({
-            date: d,
-            done: logSet.has(d)
-        })
+        const ds = dateStr(d);
+        streakDays.push({ date: d, done: logSet.has(ds) });
     }
-
     return streakDays;
 }
+
 module.exports = { dateStr, calculateStreak, history7days, habitDetails }
 
 if (require.main === module) {

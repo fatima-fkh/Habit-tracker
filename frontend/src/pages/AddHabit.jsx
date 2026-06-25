@@ -47,10 +47,10 @@ const AddHabit = ({ onClose, onHabitAdded }) => {
 
                     <div className="flex justify-end gap-2 mt-4">
                         <button onClick={onClose}
-                            className="px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
+                            className="cursor-pointer px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
                         >  Cancel </button>
 
-                        <button className="px-4 py-2 rounded-lg bg-[#EC709A] text-white font-medium hover:bg-[#d95f89] disabled:opacity-50 transition-colors"
+                        <button className=" cursor-pointer px-4 py-2 rounded-lg bg-[#EC709A] text-white font-medium hover:bg-[#d95f89] disabled:opacity-50 transition-colors"
                             type="submit" disabled={submitting}>
                             {submitting ? "Adding" : "Add habit"}
                         </button>

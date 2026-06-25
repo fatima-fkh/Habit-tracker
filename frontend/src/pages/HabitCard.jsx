@@ -1,5 +1,6 @@
 import { Flame } from "lucide-react"
 import api from '../lib/api'
+import { useNavigate } from "react-router";
 
 const flame_styles = {
     active: { color: "text-orange-500", fill: "cuurentColor" },
@@ -8,6 +9,7 @@ const flame_styles = {
 };
 
 const HabitCard = ({ habit, isSelected, onSelect, onHabitUpdated }) => {
+    const navigate = useNavigate();
     const status = habit.streakStatus || "broken"
     const flamestyle = flame_styles[status];
 
@@ -22,7 +24,10 @@ const HabitCard = ({ habit, isSelected, onSelect, onHabitUpdated }) => {
         } catch (error) { console.log(error) }
     }
     return (
-        <div onClick={() => onSelect(habit.id)}
+        <div onClick={() => {
+            onSelect(habit.id)
+            navigate(`/${habit.id}`)
+        }}
             className={`
         flex items-center justify-between p-4 rounded-xl cursor-pointer
         transition-all duration-150
@@ -44,11 +49,11 @@ const HabitCard = ({ habit, isSelected, onSelect, onHabitUpdated }) => {
             <button
                 onClick={handleMarkDone}
                 disabled={habit.loggedToday}
-                className={`
+                className={` 
           px-3 py-1.5 rounded-full text-sm font-medium transition-colors
           ${habit.loggedToday
                         ? "bg-pink-100 text-pink-500 cursor-default"
-                        : "bg-slate-100 text-slate-700 hover:bg-slate-200"}
+                        : "bg-slate-100 text-slate-700 hover:bg-slate-200 "}
         `}
             > {habit.loggedToday ? "Done" : "Mark done"}</button>
         </div>
