@@ -13,6 +13,7 @@ router.get("/", async (req, res) => {
         });
         const habitStreak = habits.map((habit) => {
             const details = habitDetails(habit);
+
             const { logDatesStr, ...rest } = details;
             return rest;
         });
@@ -46,7 +47,9 @@ router.post("/", async (req, res) => {
 // log a habit
 router.post("/:id/log", async (req, res) => {
     const habitId = Number(req.params.id)
-    const loggedOn = new Date();
+    const now = new Date();
+    const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    const loggedOn = new Date(todayStr);
 
     try {
         const log = await prisma.habitLog.create({

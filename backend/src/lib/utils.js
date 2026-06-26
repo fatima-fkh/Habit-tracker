@@ -31,7 +31,9 @@ function calculateStreak(logDates, today = new Date()) {
 }
 
 function habitDetails(habit) {
-    const logDatesStr = habit.habitLogs.map((log) => dateStr(log.addedAt));
+    const logDatesStr = habit.habitLogs.map((log) => {
+        return dateStr(log.addedAt);
+    });
     const { streak, streakStatus, loggedToday } = calculateStreak(logDatesStr);
     const last7days = history7days(logDatesStr);
 

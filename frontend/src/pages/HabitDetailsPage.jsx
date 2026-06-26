@@ -13,7 +13,7 @@ function HabitDetailPage() {
 
     const deleteHabit = async () => {
         try {
-            const response = await api.delete(`/habits/${id}`);
+            const response = await api.delete(`/${id}`);
             console.log(response.data.message);
             navigate("/");
         }
@@ -29,7 +29,7 @@ function HabitDetailPage() {
     useEffect(() => {
         const fetchHabit = async () => {
             try {
-                const response = await api.get(`/habits/${id}`)
+                const response = await api.get(`/${id}`)
                 setHabit(response.data)
             } catch (error) {
                 console.log(error)
@@ -46,10 +46,11 @@ function HabitDetailPage() {
     const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
     return (
-        <div className='min-h-screen bg-yellow-50 p-4'>
-            <div className="flex items-center gap-3 mb-6">                <button onClick={() => navigate(-1)}
-                className="p-2 rounded-full bg-yellow-200 hover:bg-pink-300 transition-colors">
-                <ArrowLeft className='w-7 h-5 m-2' /></button>
+        <div className='min-h-screen  p-4'>
+            <div className="flex items-center gap-3 mb-6">
+                <button onClick={() => navigate(-1)}
+                    className="p-2 rounded-full bg-yellow-200 hover:bg-pink-300 transition-colors">
+                    <ArrowLeft className='w-7 h-5 m-2' /></button>
 
                 <div>
                     <h1 className='text-2xl font-bold text-slate-800'>{habit.name}</h1>
@@ -127,7 +128,6 @@ function HabitDetailPage() {
             </div>
         </div>
     );
-
 }
 
 export default HabitDetailPage;

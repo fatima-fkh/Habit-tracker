@@ -19,7 +19,7 @@ function HomePage() {
 
     const fetchHabits = async () => {
         try {
-            const response = await api.get("/habits");
+            const response = await api.get("/");
             const habitsData = response.data;
 
             setHabits(habitsData);
@@ -60,10 +60,12 @@ function HomePage() {
             </div>
 
             {showModal && (
-                <AddHabit
-                    onClose={() => setShowModal(false)}
-                    onHabitAdded={handleHabitAdded}
-                />
+                <div>
+                    <AddHabit
+                        onClose={() => setShowModal(false)}
+                        onHabitAdded={handleHabitAdded}
+                    />
+                </div>
             )}
         </>
     );

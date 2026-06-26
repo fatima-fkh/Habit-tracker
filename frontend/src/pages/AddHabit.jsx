@@ -17,7 +17,7 @@ const AddHabit = ({ onClose, onHabitAdded }) => {
         setErr(null);
 
         try {
-            const response = await api.post("/habits", { name: name.trim() });
+            const response = await api.post("/", { name: name.trim() });
             onHabitAdded(response.data.habit);
             onClose();
         } catch (error) {
@@ -46,7 +46,7 @@ const AddHabit = ({ onClose, onHabitAdded }) => {
                     {err && <p className="text-red-500 text-sm mt-2">{err}</p>}
 
                     <div className="flex justify-end gap-2 mt-4">
-                        <button onClick={onClose}
+                        <button onClick={onClose} type="button"
                             className="cursor-pointer px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
                         >  Cancel </button>
 

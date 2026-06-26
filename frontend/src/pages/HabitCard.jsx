@@ -3,8 +3,8 @@ import api from '../lib/api'
 import { useNavigate } from "react-router";
 
 const flame_styles = {
-    active: { color: "text-orange-500", fill: "cuurentColor" },
-    pending: { color: "text-orange-300", fill: "cuurentColor" },
+    active: { color: "text-orange-500", fill: "currentColor" },
+    pending: { color: "text-orange-300", fill: "currentColor" },
     broken: { color: "text-slate-200", fill: "none" },
 };
 
@@ -24,8 +24,10 @@ const HabitCard = ({ habit, isSelected, onSelect, onHabitUpdated }) => {
         if (habit.loggedToday) return;
 
         try {
-            await api.post(`/habits/${habit.id}/log`);
-            onHabitUpdated();
+            await api.post(`/${habit.id}/log`)
+            if (onHabitUpdated) { onHabitUpdated(); }
+            else { console.log('hello') }
+
         } catch (error) { console.log(error) }
     }
     return (
@@ -33,11 +35,11 @@ const HabitCard = ({ habit, isSelected, onSelect, onHabitUpdated }) => {
             onSelect(habit.id)
         }}
             className={`
-        flex items-center justify-between p-4 rounded-xl cursor-pointer
-        transition-all duration-150
+        flex items-center justify-between p-4 rounded-xl 
+        transition-all duration-150 m-2 hover:scale-[1.00] active:scale-[1.01]
         ${isSelected
-                    ? "bg-yellow-100 ring-2 ring-yellow-300"
-                    : "bg-white hover:bg-slate-50"}
+                    ? "bg-yellow-100 ring-2 ring-yellow-300 hover:bg-yellow-50"
+                    : "bg-pink-100 ring-2 ring-pink-200 hover:bg-pink-50"}
       `}>
             <div>
                 <Flame
@@ -56,12 +58,11 @@ const HabitCard = ({ habit, isSelected, onSelect, onHabitUpdated }) => {
                 <button
                     onClick={handleMarkDone}
                     disabled={habit.loggedToday}
-                    className={` 
-          px-3 py-1.5 rounded-full text-sm font-medium transition-colors
-          ${habit.loggedToday
-                            ? "bg-pink-100 text-pink-500 cursor-default"
-                            : "bg-slate-100 text-slate-700 hover:bg-slate-200 "}
-        `}
+                    className={`
+          px-3 py-1.5 rounded-full text-sm font-medium transition-colors cursor-pointer
+         ${habit.loggedToday
+                            ? "bg-green-100 text-green-600 border border-green-400 cursor-not-allowed opacity-75"
+                            : "bg-slate-100 text-slate-700 border border-slate-500 hover:bg-slate-200 hover:scale-[1.03]"}      `}
                 > {habit.loggedToday ? "Done" : "Mark done"}</button>
             </div>
 

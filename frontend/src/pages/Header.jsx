@@ -6,7 +6,7 @@ const Header = ({ onAddClick }) => {
         day: 'numeric'
     })
     return (
-        <div className="bg-yellow-200 flex flex-row justify-between items-center px-6 py-4 sticky top-0 z-10">
+        <div className="bg-[#F5E8AA] flex flex-row justify-between items-center px-6 py-4 sticky top-0 z-10">
             <h1 className="text-4xl font-extrabold">Hello, User</h1>
 
             <div>
