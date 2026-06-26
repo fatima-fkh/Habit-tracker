@@ -97,7 +97,7 @@ router.delete("/:id", async (req, res) => {
                 id: habitId
             }
         });
-        res.status(200).send("Habit deleted successfully")
+        res.status(200).send({ message: "Habit deleted successfully" })
 
     } catch (error) {
         if (error.code === "P2025") {

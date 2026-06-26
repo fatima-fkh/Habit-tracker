@@ -1,4 +1,4 @@
-import { Flame } from "lucide-react"
+import { Flame, ChevronRight } from "lucide-react"
 import api from '../lib/api'
 import { useNavigate } from "react-router";
 
@@ -13,6 +13,11 @@ const HabitCard = ({ habit, isSelected, onSelect, onHabitUpdated }) => {
     const status = habit.streakStatus || "broken"
     const flamestyle = flame_styles[status];
 
+    const handleViewHistory = (e) => {
+        e.stopPropagation();
+        navigate(`/${habit.id}`);
+    }
+
     const handleMarkDone = async (e) => {
         e.stopPropagation();
 
@@ -26,7 +31,6 @@ const HabitCard = ({ habit, isSelected, onSelect, onHabitUpdated }) => {
     return (
         <div onClick={() => {
             onSelect(habit.id)
-            navigate(`/${habit.id}`)
         }}
             className={`
         flex items-center justify-between p-4 rounded-xl cursor-pointer
@@ -46,16 +50,29 @@ const HabitCard = ({ habit, isSelected, onSelect, onHabitUpdated }) => {
                     </p>
                 </div>
             </div>
-            <button
-                onClick={handleMarkDone}
-                disabled={habit.loggedToday}
-                className={` 
+
+
+            <div className="flex flex-col items-end gap-1 ml-auto">
+                <button
+                    onClick={handleMarkDone}
+                    disabled={habit.loggedToday}
+                    className={` 
           px-3 py-1.5 rounded-full text-sm font-medium transition-colors
           ${habit.loggedToday
-                        ? "bg-pink-100 text-pink-500 cursor-default"
-                        : "bg-slate-100 text-slate-700 hover:bg-slate-200 "}
+                            ? "bg-pink-100 text-pink-500 cursor-default"
+                            : "bg-slate-100 text-slate-700 hover:bg-slate-200 "}
         `}
-            > {habit.loggedToday ? "Done" : "Mark done"}</button>
+                > {habit.loggedToday ? "Done" : "Mark done"}</button>
+            </div>
+
+            <div>
+                <button
+                    onClick={handleViewHistory}
+                    className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400"
+                >
+                    <ChevronRight className="w-5 h-5" />
+                </button>
+            </div>
         </div>
     )
 }

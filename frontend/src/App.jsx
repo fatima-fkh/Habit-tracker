@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router'
 import HomePage from './pages/HomePage'
-import HabitDetailPage from './pages/HabitDetailPage'
+import HabitDetailPage from './pages/HabitDetailsPage'
+
 function App() {
   return (
     <Routes>
